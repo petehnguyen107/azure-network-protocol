@@ -69,27 +69,80 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 <li>Copy the address and paste it into Remote Desktop Connection and click on Connect and log in using the username and password you set up for VM-1 (a pop up may show up for verification, just click on "Yes" if it does)</li>
 
 <li>Congrats! You have now successfully logged into your VM!</li>
+  
+</ol>
 
+<h2>Observing Traffic in Virtual Machines</h2>
+
+<h3>Observing ICMP traffic</h3>
+<ol>
+<li>First, download Wireshark in your VM. Downloads may be slow depending on your VM's CPU
+</li>
+
+<li>Once installed, open Wireshark and start capturing packets (the blue fin icon). In the filter bar, type icmp to filter incoming ICMP packets</li>
+
+<li>Back to your physical desktop, head to your Microsoft Azure Account obtain the Private IP Address of VM-2 and copy it</li>
+
+<li>Open up Windows Powershell in VM-1 and in the command line enter ping and the private IP of VM-2. Once done, ICMP packets should now display in Wireshark</li>
+
+<li>We will now start a perpetual / non-stop ping between the Virtual Machines by entering ping then the private IP of VM-2 followed by -t causing nonstop ICMP packets displaying in Wireshark</li>
+
+<li>Heading back to the Microsoft Azure Account, we'll go to the VM-2's Network Security Group (NSG) (which should be named VM-2-nsg) in order to halt the traffic</li>
+
+<li>In VM-2-nsg, we'll go to inbound security rules and create a security rule that denies ICMPs. Click on Add to open a right side pop up to set the rule and dot in Deny under action and ICMP under Protocol. Set the Priority higher than 300 (priorities are inversely proportional meaning lower numbers have higher priority) and name the rule DENY_ICMP_PING then click Add to finish</li>
+
+<li>Once completed, you'll notice the message "Request timed out" will start displaying in Powershell in VM-1, meaning ICMP ping has been halted from our security rule</li>
+
+<li>To reinstate the traffic, simply head back to your Microsoft Azure Account and set the DENY_ICMP_PING inbound rule's action to Allow and save
+</li>
+
+</ol>
+
+
+<h3>Observing SSH traffic</h3>
+
+<ol>
+  
+<li>In Windows Powershell inside VM-1, type in ssh VM-2@[VM-2's Private IP] then hit Enter, enter in "yes" and it will ask for the password for VM-2</li>
+
+<li>Since we are accessing the Terminal of VM-2 (essentially Linux's version of a command prompt) it doesn't diplay input/dots when typing a password but do know it is registering input when typing</li>
+
+<li>Once logged in, you will be connected to the Terminal of VM-2. You can exit by entering the command exit</li>
+
+<li>Typing in commands such as username and pwd will display traffic on Wireshark, you can filter ssh traffic in Wireshark by typing in ssh in the filter bar</li>
+
+</ol>
+
+<h3>Observing DNS traffic</h3>
+<ol>
+<li>Filter DNS traffic in Wireshark by entering dns in the filter bar</li>
+
+<li>In Powershell, type in nslookup and a website such as www.disney.com</li>
+  
+</ol>
+
+<h3>Observing RDP traffic</h3>
+
+<ol>
+
+<li>Filter RDP traffic in Wireshark by entering "tcp.port==3389" in the filter bar and you'll notice non-stop traffic</li>
+
+<li>The reason for the non-stop traffic is due to the RDP is constantly showing you a live stream from one computer to another, therefor traffic is always being transmitted</li>
 
   
 </ol>
 
+<h3>Clean up to save resources</h3>
+
+<ol>
+
+<li>Log off Remote Desktop Connection</li>
+
+<li>Delete your Resource Group and VMs after finishing tinkering with them to prevent future costs, deletion of assets on Azure require verification by entering the name of the asset. Also, the Resource Group NetworkWatcherRG is created when creating NSGs for Virutal Machines; delete NetworkWatcherRG too.</li>
+
+  
+</ol>
 
 </p>
 <br />
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
