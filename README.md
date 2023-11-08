@@ -28,20 +28,22 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 <h2>Installation Steps</h2>
 
 <h3>Creating our Resource Group and Virtual Machines</h3>
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
+
 <p>
 
 <ol>
   
 <li>Through Azure Services, go to Resource groups to create a Resource Group and name your Resource Group RG-VM. Take note of the Region of your Resouce Group as it'll come in play when setting up our VMs. Once done, then click on Review + Create </li>
+
+<img src="https://i.imgur.com/VKSRyve.png" height="60%" width="60%" alt="Creating Resource Group"/>
   
 <li>Go to Virtual Machines to create an Azure Virtual Machine. Select the Resource group we've created (RG-VM) and name the virtual machine VM-1. Make sure the Region is the same as your Resource Group and we'll set our Availability Options set to No infrastructure and Security Type to Standard for this tutorial</li>
   
 <li>Set the Image (our Operating System) to Windows 10 Pro, Version 22H2, x64 Gen2</li>
   
 <li>The Size selected dicates the general processing power and RAM of our VM, for this tutorial we'll set it to Standard_E2s_V3 which provides 2 virtual CPUs and 16 GBs of RAM</li>
+
+<img src="https://i.imgur.com/oVQ9DFE.png" height="60%" width="60%" alt="Selecting Size"/>
 
 <li>Set the username and password of your VM for logging in and make sure to check the box for licensing agreement </li>
 
