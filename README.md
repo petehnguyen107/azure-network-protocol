@@ -47,7 +47,11 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 
 <li>Set the username and password of your VM for logging in and make sure to check the box for licensing agreement </li>
 
+<img src="https://i.imgur.com/1PAOiGw.png" height="60%" width="60%" alt="Setting Password"/>
+
 <li>Go to the Network tab and notice the Virtual Network created by the Virtual Machine as it should've been made by the Resource Group. It will be made automatically by the Virtual Machine</li>
+
+<img src="https://i.imgur.com/WjIeZbO.png" height="60%" width="60%" alt="Setting Virtual Network"/>
 
 <li>Then head to the Review + Create and click on Create to deploy your Virtual Machine. Give it some time to fully deploy before moving on.</li>
   
@@ -60,6 +64,8 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 
 <li>Ubuntu by default has their Administrator Account authentication as SSH public key, so we must set it as Password for logging in through Remote Desktop</li>
 
+<img src="https://i.imgur.com/HvqWQRS.png" height="60%" width="60%" alt="Setting Virtual Machine 2"/>
+
   </ol>
 
   
@@ -67,6 +73,8 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 <ol>
 
 <li>Through Azure Services, go to Virtual Machines and select VM-1 we've created and click on Connect to connect to the VM, from this page you can obtain the Public IP Address which we will use to connect to it via Remote Desktop Connection</li>
+
+<img src="https://i.imgur.com/eVC9t9H.png" height="60%" width="60%" alt="Finding Public IP Address"/>
 
 <li>Copy the address and paste it into Remote Desktop Connection and click on Connect and log in using the username and password you set up for VM-1 (a pop up may show up for verification, just click on "Yes" if it does)</li>
 
@@ -78,7 +86,9 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 
 <h3>Observing ICMP traffic</h3>
 <ol>
-<li>First, download Wireshark in your VM. Downloads may be slow depending on your VM's CPU
+
+  <img src="https://i.imgur.com/qm1yjdH.png" height="10%" width="10%" alt="Wireshark"/>
+<li>First, download Wireshark within your VM.
 </li>
 
 <li>Once installed, open Wireshark and start capturing packets (the blue fin icon). In the filter bar, type icmp to filter incoming ICMP packets</li>
@@ -87,6 +97,9 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 
 <li>Open up Windows Powershell in VM-1 and in the command line enter ping and the private IP of VM-2. Once done, ICMP packets should now display in Wireshark</li>
 
+<img src="https://i.imgur.com/ldbIKn5.png" height="80%" width="80%" alt="ICMP Packets"/>
+
+
 <li>We will now start a perpetual / non-stop ping between the Virtual Machines by entering ping then the private IP of VM-2 followed by -t causing nonstop ICMP packets displaying in Wireshark</li>
 
 <li>Heading back to the Microsoft Azure Account, we'll go to the VM-2's Network Security Group (NSG) (which should be named VM-2-nsg) in order to halt the traffic</li>
@@ -94,6 +107,8 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 <li>In VM-2-nsg, we'll go to inbound security rules and create a security rule that denies ICMPs. Click on Add to open a right side pop up to set the rule and dot in Deny under action and ICMP under Protocol. Set the Priority higher than 300 (priorities are inversely proportional meaning lower numbers have higher priority) and name the rule DENY_ICMP_PING then click Add to finish</li>
 
 <li>Once completed, you'll notice the message "Request timed out" will start displaying in Powershell in VM-1, meaning ICMP ping has been halted from our security rule</li>
+
+<img src="https://i.imgur.com/7GfKVMa.png" height="50%" width="50%" alt="Request Timed Out"/>
 
 <li>To reinstate the traffic, simply head back to your Microsoft Azure Account and set the DENY_ICMP_PING inbound rule's action to Allow and save
 </li>
@@ -111,6 +126,8 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 
 <li>Once logged in, you will be connected to the Terminal of VM-2. You can exit by entering the command exit</li>
 
+<img src="https://i.imgur.com/Yw2ZYfa.png" height="50%" width="50%" alt="VM-2 Linux command prompt"/>
+
 <li>Typing in commands such as username and pwd will display traffic on Wireshark, you can filter ssh traffic in Wireshark by typing in ssh in the filter bar</li>
 
 </ol>
@@ -120,6 +137,8 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 <li>Filter DNS traffic in Wireshark by entering dns in the filter bar</li>
 
 <li>In Powershell, type in nslookup and a website such as www.disney.com</li>
+
+<li>There will be some traffic that you will obserse.</li>
   
 </ol>
 
