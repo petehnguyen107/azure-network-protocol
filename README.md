@@ -97,7 +97,7 @@ This tutorial outlines how to set up an Virtual Machine Network in Microsoft Azu
 
 <li>Open up Windows Powershell in VM-1 and in the command line enter ping and the private IP of VM-2. Once done, ICMP packets should now display in Wireshark</li>
 
-<img src="https://i.imgur.com/ldbIKn5.png" height="80%" width="80%" alt="ICMP Packets"/>
+<img src="https://i.imgur.com/ldbIKn5.png" height="100%" width="100%" alt="ICMP Packets"/>
 
 
 <li>We will now start a perpetual / non-stop ping between the Virtual Machines by entering ping then the private IP of VM-2 followed by -t causing nonstop ICMP packets displaying in Wireshark</li>
